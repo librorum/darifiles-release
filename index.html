@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jkDir - 다운로드</title>
+    <title>darifiles - 다운로드</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0d1117;
@@ -289,7 +292,8 @@
             transition: all 0.2s ease;
         }
 
-        .install-tab:hover, .install-tab.active {
+        .install-tab:hover,
+        .install-tab.active {
             background: var(--accent);
             color: var(--bg-primary);
             border-color: var(--accent);
@@ -365,12 +369,15 @@
             h1 {
                 font-size: 2rem;
             }
+
             .container {
                 padding: 40px 16px;
             }
+
             .main-download {
                 padding: 32px 20px;
             }
+
             .main-download .download-btn {
                 padding: 16px 32px;
                 font-size: 1rem;
@@ -378,12 +385,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Hero -->
         <section class="hero">
-            <img src="https://raw.githubusercontent.com/librorum/jkDir-release/main/assets/jkdir-icon.png" alt="jkDir" class="logo" onerror="this.style.display='none'">
-            <h1>jkDir</h1>
+            <img src="https://raw.githubusercontent.com/librorum/darifiles-release/main/assets/jkdir-icon.png" alt="darifiles"
+                class="logo" onerror="this.style.display='none'">
+            <h1>darifiles</h1>
             <p class="tagline">강력하고 현대적인 파일 탐색기</p>
             <span class="version-badge" id="version">v0.5.7</span>
         </section>
@@ -395,10 +404,12 @@
             <div class="platform-name" id="main-name">macOS</div>
             <div class="platform-arch" id="main-arch">Apple Silicon (M1/M2/M3)</div>
             <a href="#" class="download-btn" id="main-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                </svg>
                 다운로드
             </a>
-            <span class="file-name" id="main-file">jkdir-macos-arm64.zip</span>
+            <span class="file-name" id="main-file">darifiles-macos-arm64.zip</span>
         </section>
 
         <!-- Other Downloads -->
@@ -432,7 +443,7 @@
         <!-- Installation Guide -->
         <section class="install-guide">
             <h2>📦 설치 방법</h2>
-            
+
             <div class="install-tabs">
                 <button class="install-tab active" data-os="macos" onclick="showInstall('macos')">macOS</button>
                 <button class="install-tab" data-os="windows" onclick="showInstall('windows')">Windows</button>
@@ -442,7 +453,7 @@
             <div id="install-macos" class="install-content active">
                 <ol class="install-steps">
                     <li>ZIP 파일 다운로드 후 압축 해제</li>
-                    <li><code>jkDir.app</code>을 Applications 폴더로 이동</li>
+                    <li><code>darifiles.app</code>을 Applications 폴더로 이동</li>
                     <li>처음 실행 시 우클릭 → "열기" 선택 (Gatekeeper 우회)</li>
                 </ol>
             </div>
@@ -457,9 +468,9 @@
 
             <div id="install-linux" class="install-content">
                 <ol class="install-steps">
-                    <li>압축 해제: <code>tar -xzvf jkdir-linux-x86_64.tar.gz</code></li>
-                    <li>실행 권한 부여: <code>chmod +x jkdir</code></li>
-                    <li>실행: <code>./jkdir</code></li>
+                    <li>압축 해제: <code>tar -xzvf darifiles-linux-x86_64.tar.gz</code></li>
+                    <li>실행 권한 부여: <code>chmod +x darifiles</code></li>
+                    <li>실행: <code>./darifiles</code></li>
                 </ol>
             </div>
         </section>
@@ -467,7 +478,7 @@
         <!-- Footer -->
         <footer>
             <p>Made with ❤️ by <a href="https://github.com/librorum">librorum</a></p>
-            <p style="margin-top: 8px;">© 2024 jkDir. All rights reserved.</p>
+            <p style="margin-top: 8px;">© 2024 darifiles. All rights reserved.</p>
         </footer>
     </div>
 
@@ -478,113 +489,114 @@
                 icon: '🍎',
                 name: 'macOS',
                 arch: 'Apple Silicon (M1/M2/M3)',
-                file: 'jkdir-macos-arm64.zip',
-                url: 'https://github.com/librorum/jkDir-release/releases/latest/download/jkdir-macos-arm64.zip',
+                file: 'darifiles-macos-arm64.zip',
+                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-arm64.zip',
                 os: 'macos'
             },
             'macos-x64': {
                 icon: '🍎',
                 name: 'macOS',
                 arch: 'Intel (x86_64)',
-                file: 'jkdir-macos-x86_64.zip',
-                url: 'https://github.com/librorum/jkDir-release/releases/latest/download/jkdir-macos-x86_64.zip',
+                file: 'darifiles-macos-x86_64.zip',
+                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-x86_64.zip',
                 os: 'macos'
             },
             'windows': {
                 icon: '🪟',
                 name: 'Windows',
                 arch: 'x86_64',
-                file: 'jkdir-windows-x86_64.exe',
-                url: 'https://github.com/librorum/jkDir-release/releases/latest/download/jkdir-windows-x86_64.exe',
+                file: 'darifiles-windows-x86_64.exe',
+                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-windows-x86_64.exe',
                 os: 'windows'
             },
             'linux': {
                 icon: '🐧',
                 name: 'Linux',
                 arch: 'x86_64',
-                file: 'jkdir-linux-x86_64.tar.gz',
-                url: 'https://github.com/librorum/jkDir-release/releases/latest/download/jkdir-linux-x86_64.tar.gz',
+                file: 'darifiles-linux-x86_64.tar.gz',
+                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-linux-x86_64.tar.gz',
                 os: 'linux'
             }
-        };
+        }
 
         // OS 감지
         function detectOS() {
-            const ua = navigator.userAgent.toLowerCase();
-            const platform = navigator.platform.toLowerCase();
-            
+            const ua = navigator.userAgent.toLowerCase()
+            const platform = navigator.platform.toLowerCase()
+
             if (ua.includes('win')) {
-                return 'windows';
+                return 'windows'
             } else if (ua.includes('mac')) {
                 // Apple Silicon 감지 시도
                 // WebGL 렌더러로 Apple GPU 확인
                 try {
-                    const canvas = document.createElement('canvas');
-                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                    const canvas = document.createElement('canvas')
+                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
                     if (gl) {
-                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
                         if (debugInfo) {
-                            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+                            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
                             if (renderer.includes('Apple M') || renderer.includes('Apple GPU')) {
-                                return 'macos-arm64';
+                                return 'macos-arm64'
                             }
                         }
                     }
-                } catch (e) {}
-                return 'macos-x64'; // 기본값: Intel
+                } catch (e) { }
+                return 'macos-x64' // 기본값: Intel
             } else if (ua.includes('linux')) {
-                return 'linux';
+                return 'linux'
             }
-            return 'macos-arm64'; // 기본값
+            return 'macos-arm64' // 기본값
         }
 
         // 메인 다운로드 설정
         function setMainDownload(key) {
-            const data = downloads[key];
-            document.getElementById('main-icon').textContent = data.icon;
-            document.getElementById('main-name').textContent = data.name;
-            document.getElementById('main-arch').textContent = data.arch;
-            document.getElementById('main-btn').href = data.url;
-            document.getElementById('main-file').textContent = data.file;
-            
+            const data = downloads[key]
+            document.getElementById('main-icon').textContent = data.icon
+            document.getElementById('main-name').textContent = data.name
+            document.getElementById('main-arch').textContent = data.arch
+            document.getElementById('main-btn').href = data.url
+            document.getElementById('main-file').textContent = data.file
+
             // 다른 다운로드 목록 생성
-            const otherContainer = document.getElementById('other-downloads');
-            otherContainer.innerHTML = '';
-            
+            const otherContainer = document.getElementById('other-downloads')
+            otherContainer.innerHTML = ''
+
             for (const [k, v] of Object.entries(downloads)) {
                 if (k !== key) {
-                    const card = document.createElement('a');
-                    card.className = 'other-download-card';
-                    card.href = v.url;
+                    const card = document.createElement('a')
+                    card.className = 'other-download-card'
+                    card.href = v.url
                     card.innerHTML = `
                         <span class="platform-icon">${v.icon}</span>
                         <div class="info">
                             <span class="platform-name">${v.name}</span>
                             <span class="platform-arch">${v.arch}</span>
                         </div>
-                    `;
-                    otherContainer.appendChild(card);
+                    `
+                    otherContainer.appendChild(card)
                 }
             }
-            
+
             // 설치 가이드 탭 활성화
-            showInstall(data.os);
+            showInstall(data.os)
         }
 
         // 설치 가이드 탭 전환
         function showInstall(platform) {
-            document.querySelectorAll('.install-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.install-tab').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById('install-' + platform).classList.add('active');
-            document.querySelector(`.install-tab[data-os="${platform}"]`).classList.add('active');
+            document.querySelectorAll('.install-content').forEach(el => el.classList.remove('active'))
+            document.querySelectorAll('.install-tab').forEach(el => el.classList.remove('active'))
+
+            document.getElementById('install-' + platform).classList.add('active')
+            document.querySelector(`.install-tab[data-os="${platform}"]`).classList.add('active')
         }
 
         // 초기화
         document.addEventListener('DOMContentLoaded', () => {
-            const detectedOS = detectOS();
-            setMainDownload(detectedOS);
+            const detectedOS = detectOS()
+            setMainDownload(detectedOS)
         });
     </script>
 </body>
+
 </html>
