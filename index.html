@@ -1,602 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>darifiles - 다운로드</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap"
-        rel="stylesheet">
-    <style>
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --accent: #58a6ff;
-            --accent-hover: #79b8ff;
-            --text-primary: #f0f6fc;
-            --text-secondary: #8b949e;
-            --border: #30363d;
-            --success: #3fb950;
-            --warning: #d29922;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            min-height: 100vh;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 24px;
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .logo {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 24px;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(88, 166, 255, 0.2);
-        }
-
-        h1 {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 3rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            background: linear-gradient(135deg, var(--accent), #a371f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
-
-        .version-badge {
-            display: inline-block;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--success);
-        }
-
-        /* Main Download (OS 감지된 것) */
-        .main-download {
-            background: linear-gradient(135deg, var(--bg-secondary), #1a2332);
-            border: 2px solid var(--accent);
-            border-radius: 24px;
-            padding: 48px;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .main-download::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), #a371f7, var(--accent));
-        }
-
-        .main-download .detected-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--bg-primary);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .main-download .platform-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-        }
-
-        .main-download .platform-name {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .main-download .platform-arch {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 28px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .main-download .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--accent);
-            color: var(--bg-primary);
-            text-decoration: none;
-            padding: 18px 48px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(88, 166, 255, 0.3);
-        }
-
-        .main-download .download-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(88, 166, 255, 0.4);
-        }
-
-        .main-download .download-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .main-download .file-name {
-            display: block;
-            margin-top: 16px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Other Downloads Section */
-        .other-downloads-section {
-            margin-bottom: 48px;
-        }
-
-        .other-downloads-section h3 {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .other-downloads {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .other-download-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            color: var(--text-primary);
-            min-width: 200px;
-        }
-
-        .other-download-card:hover {
-            border-color: var(--accent);
-            background: var(--bg-tertiary);
-        }
-
-        .other-download-card .platform-icon {
-            font-size: 1.5rem;
-        }
-
-        .other-download-card .info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .other-download-card .platform-name {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .other-download-card .platform-arch {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Features */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .feature {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .feature-text {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Installation Guide */
-        .install-guide {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 40px;
-        }
-
-        .install-guide h2 {
-            font-size: 1.5rem;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .install-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .install-tab {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .install-tab:hover,
-        .install-tab.active {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border-color: var(--accent);
-        }
-
-        .install-content {
-            display: none;
-        }
-
-        .install-content.active {
-            display: block;
-        }
-
-        .install-steps {
-            list-style: none;
-            counter-reset: step;
-        }
-
-        .install-steps li {
-            position: relative;
-            padding-left: 48px;
-            margin-bottom: 16px;
-            counter-increment: step;
-        }
-
-        .install-steps li::before {
-            content: counter(step);
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 32px;
-            height: 32px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        code {
-            background: var(--bg-primary);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--accent);
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 40px 16px;
-            }
-
-            .main-download {
-                padding: 32px 20px;
-            }
-
-            .main-download .download-btn {
-                padding: 16px 32px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="다리파일은 폴더 탐색, 문서 미리보기, 터미널과 정리 도구를 한곳에 담은 데스크톱 파일 관리자입니다. macOS, Windows, Linux용으로 다운로드하세요.">
+  <meta name="theme-color" content="#f6f8fc">
+  <title>다리파일 — 파일에서 시작해, 작업까지</title>
+  <link rel="icon" href="assets/darifiles.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="page.js" defer></script>
 </head>
-
 <body>
-    <div class="container">
-        <!-- Hero -->
-        <section class="hero">
-            <img src="https://raw.githubusercontent.com/librorum/darifiles-release/main/assets/jkdir-icon.png" alt="darifiles"
-                class="logo" onerror="this.style.display='none'">
-            <h1>darifiles</h1>
-            <p class="tagline">강력하고 현대적인 파일 탐색기</p>
-            <span class="version-badge" id="version">v0.5.7</span>
-        </section>
-
-        <!-- Main Download (OS 감지) -->
-        <section class="main-download" id="main-download">
-            <span class="detected-badge" id="detected-badge">🔍 사용자 OS 감지됨</span>
-            <div class="platform-icon" id="main-icon">🍎</div>
-            <div class="platform-name" id="main-name">macOS</div>
-            <div class="platform-arch" id="main-arch">Apple Silicon (M1/M2/M3)</div>
-            <a href="#" class="download-btn" id="main-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-                </svg>
-                다운로드
-            </a>
-            <span class="file-name" id="main-file">darifiles-macos-arm64.zip</span>
-        </section>
-
-        <!-- Other Downloads -->
-        <section class="other-downloads-section">
-            <h3>다른 플랫폼</h3>
-            <div class="other-downloads" id="other-downloads">
-                <!-- JS로 동적 생성 -->
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section class="features">
-            <div class="feature">
-                <div class="feature-icon">🔲</div>
-                <div class="feature-text">다중 Pane 지원</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⌨️</div>
-                <div class="feature-text">키보드 중심 조작</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎨</div>
-                <div class="feature-text">다크/라이트 테마</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-text">Rust 기반 고성능</div>
-            </div>
-        </section>
-
-        <!-- Installation Guide -->
-        <section class="install-guide">
-            <h2>📦 설치 방법</h2>
-
-            <div class="install-tabs">
-                <button class="install-tab active" data-os="macos" onclick="showInstall('macos')">macOS</button>
-                <button class="install-tab" data-os="windows" onclick="showInstall('windows')">Windows</button>
-                <button class="install-tab" data-os="linux" onclick="showInstall('linux')">Linux</button>
-            </div>
-
-            <div id="install-macos" class="install-content active">
-                <ol class="install-steps">
-                    <li>ZIP 파일 다운로드 후 압축 해제</li>
-                    <li><code>darifiles.app</code>을 Applications 폴더로 이동</li>
-                    <li>처음 실행 시 우클릭 → "열기" 선택 (Gatekeeper 우회)</li>
-                </ol>
-            </div>
-
-            <div id="install-windows" class="install-content">
-                <ol class="install-steps">
-                    <li>exe 파일 다운로드</li>
-                    <li>원하는 위치에서 실행</li>
-                    <li>Windows Defender 경고 시 "추가 정보" → "실행" 클릭</li>
-                </ol>
-            </div>
-
-            <div id="install-linux" class="install-content">
-                <ol class="install-steps">
-                    <li>압축 해제: <code>tar -xzvf darifiles-linux-x86_64.tar.gz</code></li>
-                    <li>실행 권한 부여: <code>chmod +x darifiles</code></li>
-                    <li>실행: <code>./darifiles</code></li>
-                </ol>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <p>Made with ❤️ by <a href="https://github.com/librorum">librorum</a></p>
-            <p style="margin-top: 8px;">© 2024 darifiles. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script>
-        // 다운로드 정보
-        const downloads = {
-            'macos-arm64': {
-                icon: '🍎',
-                name: 'macOS',
-                arch: 'Apple Silicon (M1/M2/M3)',
-                file: 'darifiles-macos-arm64.zip',
-                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-arm64.zip',
-                os: 'macos'
-            },
-            'macos-x64': {
-                icon: '🍎',
-                name: 'macOS',
-                arch: 'Intel (x86_64)',
-                file: 'darifiles-macos-x86_64.zip',
-                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-x86_64.zip',
-                os: 'macos'
-            },
-            'windows': {
-                icon: '🪟',
-                name: 'Windows',
-                arch: 'x86_64',
-                file: 'darifiles-windows-x86_64.exe',
-                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-windows-x86_64.exe',
-                os: 'windows'
-            },
-            'linux': {
-                icon: '🐧',
-                name: 'Linux',
-                arch: 'x86_64',
-                file: 'darifiles-linux-x86_64.tar.gz',
-                url: 'https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-linux-x86_64.tar.gz',
-                os: 'linux'
-            }
-        }
-
-        // OS 감지
-        function detectOS() {
-            const ua = navigator.userAgent.toLowerCase()
-            const platform = navigator.platform.toLowerCase()
-
-            if (ua.includes('win')) {
-                return 'windows'
-            } else if (ua.includes('mac')) {
-                // Apple Silicon 감지 시도
-                // WebGL 렌더러로 Apple GPU 확인
-                try {
-                    const canvas = document.createElement('canvas')
-                    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-                    if (gl) {
-                        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info')
-                        if (debugInfo) {
-                            const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL)
-                            if (renderer.includes('Apple M') || renderer.includes('Apple GPU')) {
-                                return 'macos-arm64'
-                            }
-                        }
-                    }
-                } catch (e) { }
-                return 'macos-x64' // 기본값: Intel
-            } else if (ua.includes('linux')) {
-                return 'linux'
-            }
-            return 'macos-arm64' // 기본값
-        }
-
-        // 메인 다운로드 설정
-        function setMainDownload(key) {
-            const data = downloads[key]
-            document.getElementById('main-icon').textContent = data.icon
-            document.getElementById('main-name').textContent = data.name
-            document.getElementById('main-arch').textContent = data.arch
-            document.getElementById('main-btn').href = data.url
-            document.getElementById('main-file').textContent = data.file
-
-            // 다른 다운로드 목록 생성
-            const otherContainer = document.getElementById('other-downloads')
-            otherContainer.innerHTML = ''
-
-            for (const [k, v] of Object.entries(downloads)) {
-                if (k !== key) {
-                    const card = document.createElement('a')
-                    card.className = 'other-download-card'
-                    card.href = v.url
-                    card.innerHTML = `
-                        <span class="platform-icon">${v.icon}</span>
-                        <div class="info">
-                            <span class="platform-name">${v.name}</span>
-                            <span class="platform-arch">${v.arch}</span>
-                        </div>
-                    `
-                    otherContainer.appendChild(card)
-                }
-            }
-
-            // 설치 가이드 탭 활성화
-            showInstall(data.os)
-        }
-
-        // 설치 가이드 탭 전환
-        function showInstall(platform) {
-            document.querySelectorAll('.install-content').forEach(el => el.classList.remove('active'))
-            document.querySelectorAll('.install-tab').forEach(el => el.classList.remove('active'))
-
-            document.getElementById('install-' + platform).classList.add('active')
-            document.querySelector(`.install-tab[data-os="${platform}"]`).classList.add('active')
-        }
-
-        // 초기화
-        document.addEventListener('DOMContentLoaded', () => {
-            const detectedOS = detectOS()
-            setMainDownload(detectedOS)
-        });
-    </script>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <header class="site_header wrap">
+    <a class="brand" href="#"><img src="assets/darifiles.svg" width="34" height="34" alt=""><span>다리파일 <small>darifiles</small></span></a>
+    <nav aria-label="주 메뉴"><a href="#features">기능 둘러보기</a><a href="#download">다운로드</a><a href="https://github.com/librorum/darifiles-release/releases">릴리즈 노트</a></nav>
+  </header>
+  <main id="main">
+    <section class="hero wrap">
+      <p class="intro">폴더를 열면, 작업 공간이 됩니다.</p>
+      <h1>파일에서 시작해,<br>작업까지.</h1>
+      <p class="lead">폴더를 나란히 펼치고, 문서를 바로 읽고,<br class="desktop_break"> 터미널로 작업을 이어가세요. 다리파일 한 창에서.</p>
+      <a class="button primary" href="#download">다리파일 다운로드 <span aria-hidden="true">↓</span></a>
+      <p class="platforms">macOS / Windows / Linux</p>
+      <figure class="hero_screen"><img src="assets/terminal.png" width="2048" height="1120" fetchpriority="high" alt="다리파일에서 폴더 목록과 내장 터미널을 함께 연 실제 앱 화면"><figcaption>필요한 폴더와 터미널을 한 창에. 실제 macOS 앱 화면입니다.</figcaption></figure>
+    </section>
+    <section class="feature_section wrap" id="features" aria-labelledby="features_title">
+      <div class="section_intro"><p class="intro">창을 오가는 시간을 줄이세요</p><h2 id="features_title">정리하고, 살펴보고,<br>그 자리에서 작업하기.</h2><p>파일을 옮기는 순간부터 작업을 마칠 때까지.<br>자주 쓰는 도구를 파일 가까이에 모았습니다.</p></div>
+      <div class="feature_list">
+        <article><h3>여러 폴더를 나란히</h3><p>좌우·상하·4분할과 탭으로 폴더를 함께 펼쳐 보세요. 워크스페이스마다 탭과 터미널을 따로 보관합니다.</p></article>
+        <article><h3>열기 전에 먼저 살펴보기</h3><p>스페이스 키로 이미지·PDF·한글 문서를 미리 봅니다. 문서를 확인하려고 다른 앱부터 열 필요가 없습니다.</p></article>
+        <article><h3>로컬과 클라우드를 한곳에</h3><p>컴퓨터의 폴더와 GitHub·S3·Cloudflare R2를 같은 탐색기에서 살펴보세요. 서비스에 따라 지원하는 파일 작업은 다릅니다.</p></article>
+        <article><h3>정리 도구도 가까이에</h3><p>중복 파일, 대용량 파일, 빈 폴더를 찾는 도구함. 무엇이 공간을 차지하는지 확인하고 정리할 수 있습니다.</p></article>
+      </div>
+    </section>
+    <section class="gallery_section" aria-labelledby="gallery_title">
+      <div class="wrap">
+        <h2 id="gallery_title">설치하기 전에, 직접 둘러보세요.</h2>
+        <p>실행 중인 다리파일에서 촬영한 화면입니다. 탭을 눌러 작업 모습을 살펴보세요.</p>
+        <div class="gallery_tabs" role="tablist" aria-label="앱 기능 화면">
+          <button id="tab_browser" role="tab" aria-selected="true" aria-controls="panel_browser" data-screen="browser">파일 탐색</button>
+          <button id="tab_terminal" role="tab" aria-selected="false" aria-controls="panel_terminal" tabindex="-1" data-screen="terminal">내장 터미널</button>
+          <button id="tab_toolbox" role="tab" aria-selected="false" aria-controls="panel_toolbox" tabindex="-1" data-screen="toolbox">도구함</button>
+        </div>
+        <figure id="panel_browser" role="tabpanel" aria-labelledby="tab_browser"><a href="assets/file_browser.png" target="_blank" rel="noopener" aria-label="파일 탐색 화면 원본 보기, 새 탭"><img src="assets/file_browser.png" width="2048" height="1120" loading="lazy" alt="사이드바의 워크스페이스와 즐겨찾기 옆에 폴더와 파일 목록을 표시한 다리파일"></a><figcaption><strong>내 파일을 찾는 익숙한 자리.</strong> 워크스페이스, 즐겨찾기, 디스크, 온라인 스토리지를 사이드바에서 바로 엽니다. 이미지를 누르면 크게 볼 수 있습니다.</figcaption></figure>
+        <figure id="panel_terminal" role="tabpanel" aria-labelledby="tab_terminal" hidden><a href="assets/terminal.png" target="_blank" rel="noopener" aria-label="내장 터미널 화면 원본 보기, 새 탭"><img src="assets/terminal.png" width="2048" height="1120" loading="lazy" alt="파일 탐색 영역 아래로 터미널을 분할해 함께 사용하는 다리파일"></a><figcaption><strong>보던 폴더에서 바로 명령 실행.</strong> 파일 탐색과 터미널을 함께 열어, 폴더를 확인하면서 작업을 이어갑니다.</figcaption></figure>
+        <figure id="panel_toolbox" role="tabpanel" aria-labelledby="tab_toolbox" hidden><a href="assets/toolbox.png" target="_blank" rel="noopener" aria-label="도구함 화면 원본 보기, 새 탭"><img src="assets/toolbox.png" width="2048" height="1120" loading="lazy" alt="컴퓨터 청소, 중복 파일 찾기, 앱 언인스톨, 대용량 파일, 빈 폴더 찾기가 모인 도구함"></a><figcaption><strong>정리가 필요할 때는 도구함.</strong> 중복 파일과 큰 파일 찾기부터 앱 관리까지, 필요한 도구를 골라 실행합니다.</figcaption></figure>
+        <noscript><p>자바스크립트 없이도 화면 원본을 볼 수 있습니다: <a href="assets/terminal.png">내장 터미널</a>, <a href="assets/toolbox.png">도구함</a>.</p></noscript>
+      </div>
+    </section>
+    <section class="download_section wrap" id="download" aria-labelledby="download_title">
+      <div class="section_intro"><p class="intro">내 컴퓨터에서 시작하기</p><h2 id="download_title">다리파일 다운로드</h2><p id="release_status" aria-live="polite">설치 파일은 GitHub의 최신 공개 릴리즈로 연결됩니다.</p><a class="text_link" href="https://github.com/librorum/darifiles-release/releases/latest">릴리즈 노트와 전체 파일 보기</a><p class="download_hint" id="device_hint">컴퓨터의 운영체제와 CPU에 맞는 파일을 선택하세요.</p></div>
+      <div class="download_list">
+        <a class="download_item" data-platform="mac" href="https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-arm64.zip"><span><strong>macOS</strong><small>Apple Silicon · M 시리즈</small></span><span class="file_type">ZIP <span aria-hidden="true">↓</span></span></a>
+        <a class="download_item" data-platform="mac" href="https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-macos-x86_64.zip"><span><strong>macOS</strong><small>Intel · x86_64</small></span><span class="file_type">ZIP <span aria-hidden="true">↓</span></span></a>
+        <a class="download_item" data-platform="windows" href="https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-windows-x86_64.exe"><span><strong>Windows</strong><small>x86_64 · 실행 파일</small></span><span class="file_type">EXE <span aria-hidden="true">↓</span></span></a>
+        <a class="download_item" data-platform="linux" href="https://github.com/librorum/darifiles-release/releases/latest/download/darifiles-linux-x86_64.tar.gz"><span><strong>Linux</strong><small>x86_64 · 압축 파일</small></span><span class="file_type">TAR.GZ <span aria-hidden="true">↓</span></span></a>
+      </div>
+    </section>
+    <section class="install_section wrap" aria-labelledby="install_title">
+      <h2 id="install_title">다운로드 다음에는</h2>
+      <details open><summary>macOS에 설치하기</summary><ol><li>Apple 메뉴의 ‘이 Mac에 관하여’에서 칩 종류를 확인하고 파일을 받으세요.</li><li>ZIP을 풀고 <code>darifiles.app</code>을 응용 프로그램 폴더로 옮겨 실행하세요.</li><li>실행이 차단되면 시스템 설정의 ‘개인정보 보호 및 보안’에서 안내를 확인하세요.</li></ol></details>
+      <details><summary>Windows에서 실행하기</summary><p>EXE 파일을 원하는 폴더에 저장한 뒤 실행하세요. 보안 안내가 나타나면 다운로드 출처와 파일을 확인하세요.</p></details>
+      <details><summary>Linux에서 실행하기</summary><p>다운로드한 폴더에서 압축을 풀고 실행 권한을 부여하세요.</p><pre><code>tar -xzf darifiles-linux-x86_64.tar.gz
+chmod +x darifiles
+./darifiles</code></pre></details>
+      <details><summary>새 버전은 어디에서 확인하나요?</summary><p>공개된 최신 버전과 변경 사항은 <a href="https://github.com/librorum/darifiles-release/releases/latest">GitHub 릴리즈</a>에서 확인할 수 있습니다. 자동 업데이트 기능은 다음 앱 릴리즈에 포함될 예정입니다.</p></details>
+    </section>
+  </main>
+  <footer class="wrap"><a class="brand" href="#">다리파일 <small>darifiles</small></a><p>파일을 다루는 일이, 조금 더 편해지도록.</p><a href="https://github.com/librorum/darifiles-release/issues">문제 제보</a> <a href="https://github.com/librorum">만든 사람</a></footer>
 </body>
-
 </html>
